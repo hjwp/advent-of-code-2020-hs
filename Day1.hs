@@ -1,4 +1,4 @@
-module Advent where
+module Day1 where
 
 fixExpenses :: [Int] -> Int
 fixExpenses xs = head [ x * y | x <- xs, y <- xs, x /= y, x + y == 2020]
