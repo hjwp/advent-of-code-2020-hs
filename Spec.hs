@@ -19,6 +19,8 @@ main = hspec $ do
     it "splitOnChar should" $ do
         splitOnChar ',' "a,b" `shouldBe` ("a", "b")
         splitOnChar ',' "aa,bb" `shouldBe` ("aa", "bb")
+        splitOnChar ',' "a,bb" `shouldBe` ("a", "bb")
+        splitOnChar ',' "abb" `shouldBe` ("abb", "")
 
   describe "advent of code day 2 passwords thing" $ do
 

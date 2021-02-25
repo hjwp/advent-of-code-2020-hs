@@ -3,11 +3,17 @@ module Day2 where
 
 data Rule = Rule {minCount :: Int, maxCount:: Int, requiredChar :: Char} deriving (Show, Eq)
 
--- should be in the stdlib but what the hey.
--- this is probably increeeeedibly inefficient due to the double-reverse
-splitOnChar :: Char -> String -> (String, String)
-splitOnChar c s = (takeWhile (/= c) s, reverse $ takeWhile (/= c) $ reverse s)
 
+
+-- should be in the stdlib but what the hey.
+splitOnChar :: Char -> String -> (String, String)
+splitOnChar c s = (before, after)
+    where (before, after, _, _) = foldl accum ("", "", c, False) s
+          accum :: (String, String, Char, Bool) -> Char -> (String, String, Char, Bool)
+          accum (before, after, needle, alreadySeen) currentChar
+            | currentChar == needle = (before, after, needle, True)
+            | alreadySeen == True = (before, after ++ [currentChar], needle, alreadySeen)
+            | alreadySeen == False = (before ++ [currentChar], after, needle, alreadySeen)
 
 -- | Parse a string of the form "1-3 a"
 parseRule :: String -> Rule
