@@ -7,13 +7,15 @@ data Rule = Rule {minCount :: Int, maxCount:: Int, requiredChar :: Char} derivin
 
 -- should be in the stdlib but what the hey.
 splitOnChar :: Char -> String -> (String, String)
-splitOnChar c s = (before, after)
-    where (before, after, _, _) = foldl accum ("", "", c, False) s
-          accum :: (String, String, Char, Bool) -> Char -> (String, String, Char, Bool)
-          accum (before, after, needle, alreadySeen) currentChar
+splitOnChar c s = if before == "" then (after, "") else (before, after)
+    where (before, after, _, _) = foldr accum ("", "", c, False) s
+          -- this is less readable than it was with foldl
+          -- but i gather it will be more efficient...
+          accum :: Char -> (String, String, Char, Bool) -> (String, String, Char, Bool)
+          accum currentChar (before, after, needle, alreadySeen)
             | currentChar == needle = (before, after, needle, True)
-            | alreadySeen == True = (before, after ++ [currentChar], needle, alreadySeen)
-            | alreadySeen == False = (before ++ [currentChar], after, needle, alreadySeen)
+            | alreadySeen == False = (before, currentChar:after, needle, alreadySeen)
+            | alreadySeen == True = (currentChar:before, after, needle, alreadySeen)
 
 -- | Parse a string of the form "1-3 a"
 parseRule :: String -> Rule
@@ -43,3 +45,9 @@ checkLine l =
 
 findValidPasswords :: [String] -> Int
 findValidPasswords s = length $ filter checkLine s
+
+
+main :: IO ()
+main = do
+    input <- getContents
+    print $ findValidPasswords $ lines input

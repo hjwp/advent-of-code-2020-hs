@@ -1,7 +1,7 @@
 -- file Spec.hs
 import Test.Hspec
 import Day1 (fixExpenses, fixExpenses2)
-import Day2
+import Day2 hiding (main)
 
 main :: IO ()
 main = hspec $ do
