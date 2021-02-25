@@ -5,7 +5,7 @@ data Rule = Rule {minCount :: Int, maxCount:: Int, requiredChar :: Char} derivin
 
 
 
--- should be in the stdlib but what the hey.
+-- couldn't figure out how to use any kind of stdlib function lol
 splitOnChar :: Char -> String -> (String, String)
 splitOnChar c s = if before == "" then (after, "") else (before, after)
     where (before, after, _, _) = foldr accum ("", "", c, False) s
