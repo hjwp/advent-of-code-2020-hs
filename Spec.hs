@@ -2,6 +2,7 @@
 import Test.Hspec
 import Day1 (fixExpenses, fixExpenses2)
 import Day2 hiding (main)
+import Day3 hiding (main)
 
 main :: IO ()
 main = hspec $ do
@@ -23,7 +24,6 @@ main = hspec $ do
         splitOnChar ',' "abb" `shouldBe` ("abb", "")
 
   describe "advent of code day 2 passwords thing" $ do
-
     it "parseLine should" $ do
         let r1 = Rule {minCount=1, maxCount=3, requiredChar='a'}
         parseLine "1-3 a: abcde" `shouldBe` (r1, "abcde")
@@ -48,3 +48,20 @@ main = hspec $ do
                       ,"2-5 c: cccccc"
                       ]
         findValidPasswords example `shouldBe` 0
+
+  describe "advent of code day 3 maps thing " $ do
+    it "should handle the simple example" $ do
+        let example = ["..##......."
+                      ,"#...#...#.."
+                      ,".#....#..#."
+                      ,"..#.#...#.#"
+                      ,".#...##..#."
+                      ,"..#.##....."
+                      ,".#.#.#....#"
+                      ,".#........#"
+                      ,"#.##...#..."
+                      ,"#...##....#"
+                      ,".#..#...#.#"
+                      ]
+
+        (spotTrees example) `shouldBe` [False, True, False, True, True, False, True, True, True, True]
