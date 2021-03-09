@@ -50,6 +50,10 @@ main = hspec $ do
         findValidPasswords example `shouldBe` 0
 
   describe "advent of code day 3 maps thing " $ do
+    it "should do rightThreeDownOnes" $ do
+        rightThreeDownOnes ["12345", "12345", "12345"] `shouldBe` ['4', '2']
+        rightThreeDownOnes ["abc", "abc", "abc", "abc"] `shouldBe` ['a', 'a', 'a']
+
     it "should handle the simple example" $ do
         let example = ["..##......."
                       ,"#...#...#.."
