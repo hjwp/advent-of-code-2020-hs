@@ -50,9 +50,12 @@ main = hspec $ do
         findValidPasswords example `shouldBe` 0
 
   describe "advent of code day 3 maps thing " $ do
-    it "should do rightThreeDownOnes" $ do
-        rightThreeDownOnes ["12345", "12345", "12345"] `shouldBe` ['4', '2']
-        rightThreeDownOnes ["abc", "abc", "abc", "abc"] `shouldBe` ['a', 'a', 'a']
+    it "should do rightAndDown 3 1" $ do
+        rightAndDown 3 1 ["12345", "12345", "12345"] `shouldBe` ['4', '2']
+        rightAndDown 3 1 ["abc", "abc", "abc", "abc"] `shouldBe` ['a', 'a', 'a']
+
+    it "should do rightAndDown 2 2" $ do
+        rightAndDown 2 2 (take 5 (repeat "12345")) `shouldBe` ['3', '5', '2', '4']
 
     it "should handle the simple example" $ do
         let example = ["..##......."
@@ -68,4 +71,9 @@ main = hspec $ do
                       ,".#..#...#.#"
                       ]
 
-        (spotTrees example) `shouldBe` [False, True, False, True, True, False, True, True, True, True]
+        (spotTrees 3 1 example) `shouldBe` [False, True, False, True, True, False, True, True, True, True]
+        (countTrees 1 1 example) `shouldBe` 2
+        (countTrees 3 1 example) `shouldBe` 7
+        (countTrees 5 1 example) `shouldBe` 3
+        (countTrees 7 1 example) `shouldBe` 4
+        (countTrees 1 2 example) `shouldBe` 2
