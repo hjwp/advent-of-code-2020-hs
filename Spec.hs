@@ -51,11 +51,11 @@ main = hspec $ do
 
   describe "advent of code day 3 maps thing " $ do
     it "should do rightAndDown 3 1" $ do
-        rightAndDown 3 1 ["12345", "12345", "12345"] 0 `shouldBe` ['1', '4', '2']
-        rightAndDown 3 1 ["abc", "abc", "abc", "abc"] 0 `shouldBe` ['a', 'a', 'a', 'a']
+        rightAndDown 3 1 ["12345", "12345", "12345"] `shouldBe` ['1', '4', '2']
+        rightAndDown 3 1 ["abc", "abc", "abc", "abc"] `shouldBe` ['a', 'a', 'a', 'a']
 
     it "should do rightAndDown 2 2" $ do
-        rightAndDown 2 2 (take 5 (repeat "12345")) 0 `shouldBe` ['1', '3', '5', '2', '4']
+        rightAndDown 2 2 ["abcd", "efgh", "jikl", "mnop", "qrst"] `shouldBe` ['a', 'k', 'q']
 
     it "should handle the simple example" $ do
         let example = ["..##......."
