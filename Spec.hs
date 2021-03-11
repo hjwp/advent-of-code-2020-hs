@@ -71,7 +71,7 @@ main = hspec $ do
                       ,".#..#...#.#"
                       ]
 
-        (spotTrees 3 1 example) `shouldBe` [False, False, True, False, True, True, False, True, True, True, True]
+        (spotTrees 3 1 example) `shouldBe` [True, True, True, True, True, True, True]
         (countTrees 1 1 example) `shouldBe` 2
         (countTrees 3 1 example) `shouldBe` 7
         (countTrees 5 1 example) `shouldBe` 3
