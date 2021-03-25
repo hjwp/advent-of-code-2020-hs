@@ -1,21 +1,17 @@
 module Day2 where
+import Data.List (break)
 
 
 data Rule = Rule {minCount :: Int, maxCount:: Int, requiredChar :: Char} deriving (Show, Eq)
 
 
 
--- couldn't figure out how to use any kind of stdlib function lol
+-- no stdlib function for this sigh
 splitOnChar :: Char -> String -> (String, String)
-splitOnChar c s = if before == "" then (after, "") else (before, after)
-    where (before, after, _, _) = foldr accum ("", "", c, False) s
-          -- this is less readable than it was with foldl
-          -- but i gather it will be more efficient...
-          accum :: Char -> (String, String, Char, Bool) -> (String, String, Char, Bool)
-          accum currentChar (before, after, needle, alreadySeen)
-            | currentChar == needle = (before, after, needle, True)
-            | alreadySeen == False = (before, currentChar:after, needle, alreadySeen)
-            | alreadySeen == True = (currentChar:before, after, needle, alreadySeen)
+splitOnChar c s =
+    let (before, afterIncludingSep) = break (==c) s
+        after = if null afterIncludingSep then [] else tail afterIncludingSep
+     in (before, after)
 
 -- | Parse a string of the form "1-3 a"
 parseRule :: String -> Rule
