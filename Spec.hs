@@ -49,6 +49,13 @@ main = hspec $ do
                       ]
         findValidPasswords example `shouldBe` 0
 
+  describe "advent of code day 2 passwords thing part 2" $ do
+
+    it "does the simple example correctly" $ do
+        isValid2 "1-3 a: abcde" `shouldBe` True
+        isValid2 "1-3 b: cdefg" `shouldBe` False
+        isValid2 "2-9 c: ccccccccc" `shouldBe` False
+
   describe "advent of code day 3 maps thing " $ do
     it "should do rightAndDown 3 1" $ do
         rightAndDown 3 1 ["12345", "12345", "12345"] `shouldBe` ['1', '4', '2']

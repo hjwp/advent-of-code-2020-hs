@@ -42,8 +42,23 @@ checkLine l =
 findValidPasswords :: [String] -> Int
 findValidPasswords s = length $ filter checkLine s
 
+isValid2 :: String -> Bool
+isValid2 s = checkLine2 s
+
+checkLine2 :: String -> Bool
+checkLine2 l =
+    checkPassword2 rule password
+    where (rule, password) = parseLine l
+
+checkPassword2 :: Rule ->  String -> Bool
+checkPassword2 rule string =
+    (char1 == needle || char2 == needle)
+    && (char1 /= char2)
+        where char1 = string !! (minCount rule - 1)
+              char2 = string !! (maxCount rule - 1)
+              needle = requiredChar rule
 
 main :: IO ()
 main = do
     input <- getContents
-    print $ findValidPasswords $ lines input
+    print $ length . filter checkLine2 $ lines input
