@@ -3,6 +3,7 @@ import Test.Hspec
 import Day1 (fixExpenses, fixExpenses2)
 import Day2 hiding (main)
 import Day3 hiding (main)
+import qualified Day4
 
 main :: IO ()
 main = hspec $ do
@@ -85,3 +86,29 @@ main = hspec $ do
         (countTrees 7 1 example) `shouldBe` 4
         (countTrees 1 2 example) `shouldBe` 2
         allTrees example `shouldBe` 336
+
+  describe "advent of code day 4 passports thing" $ do
+
+    it "fieldsOf should do sensible things" $ do
+        Day4.fieldsOf "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n\
+                \byr:1937 iyr:2017 cid:147 hgt:183cm"
+                `shouldBe` Day4.fields
+
+    it "should handle some simple examples" $ do
+        let example = 
+                "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd\n\
+                \byr:1937 iyr:2017 cid:147 hgt:183cm\n\
+                \\n\
+                \iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884\n\
+                \hcl:#cfa07d byr:1929\n\
+                \\n\
+                \hcl:#ae17e1 iyr:2013\n\
+                \eyr:2024\n\
+                \ecl:brn pid:760753108 byr:1931\n\
+                \hgt:179cm\n\
+                \\n\
+                \hcl:#cfa07d eyr:2025 pid:166559648\n\
+                \iyr:2011 ecl:brn hgt:59in"
+        
+        (map Day4.isValid $ Day4.separatePasswords example) `shouldBe` [True, False, True, False]
+
